@@ -1,0 +1,30 @@
+[language-server.scls]
+command = "simple-completion-language-server"
+
+[language-server.scls.config]
+max_completion_items = 20            
+snippets_first = true                
+snippets_inline_by_word_tail = false 
+feature_words = true                 
+feature_snippets = true              
+feature_unicode_input = true         
+feature_paths = true                 
+feature_citations = false            
+
+[[language]]
+name = "typst"
+language-servers = [ "scls", "tinymist" ]
+auto-format = true
+soft-wrap.enable = true
+
+[language-server.tinymist]
+command = "tinymist"
+config.exportPdf = "onSave"
+config.formatterMode = "typstyle"
+
+[[grammar]]
+name = "typst"
+source.git = "https://github.com/uben0/tree-sitter-typst"
+source.rev = "13863ddcbaa7b68ee6221cea2e3143415e64aea4"
+
+

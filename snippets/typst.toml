@@ -1,0 +1,4 @@
+[[snippets]]
+prefix = "prob"
+scope = [ "typst" ]
+body = '#problem[$1]'
