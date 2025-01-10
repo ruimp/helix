@@ -4,6 +4,8 @@ theme = "kanagawa"
 line-number = "relative"
 bufferline = "multiple"
 color-modes = true
+cursorline = true
+continue-comments = false
 
 [editor.cursor-shape]
 normal = "block"
@@ -17,9 +19,11 @@ skip-levels = 1
 [editor.lsp]
 display-messages = true
 
+[editor.soft-wrap]
+wrap-at-text-width = true
+
 [editor.inline-diagnostics]
-cursor-line = "hint"
-other-lines = "error"
+cursor-line = "warning"
 
 [editor.file-picker]
 hidden = false

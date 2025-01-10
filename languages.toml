@@ -1,30 +1,69 @@
-[language-server.scls]
-command = "simple-completion-language-server"
-
-[language-server.scls.config]
-max_completion_items = 20            
-snippets_first = true                
-snippets_inline_by_word_tail = false 
-feature_words = true                 
-feature_snippets = true              
-feature_unicode_input = true         
-feature_paths = true                 
-feature_citations = false            
-
+# Typst
 [[language]]
 name = "typst"
-language-servers = [ "scls", "tinymist" ]
+scope = "source.typst"
+injection-regex = "typ(st)?"
+file-types = [ "typst", "typ" ]
+comment-token = "//"
+block-comment-tokens = { start = "/*", end = "*/" }
+language-servers = [ "tinymist" ]
+indent = { tab-width = 2, unit = "  "}
 auto-format = true
 soft-wrap.enable = true
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'$' = '$'
+'"' = '"'
+
+[[grammar]]
+name = "typst"
+source = { git = "https://github.com/uben0/tree-sitter-typst", rev = "13863ddcbaa7b68ee6221cea2e3143415e64aea4"}
 
 [language-server.tinymist]
 command = "tinymist"
 config.exportPdf = "onSave"
 config.formatterMode = "typstyle"
 
+# Rust
+[[language]]
+name = "rust"
+scope = "source.rust"
+injection-regex = "rs|rust"
+file-types = ["rs"]
+roots = ["Cargo.toml", "Cargo.lock"]
+shebangs = ["rust-script", "cargo"]
+auto-format = true
+comment-tokens = ["//", "///", "//!"]
+block-comment-tokens = [
+  { start = "/*", end = "*/" },
+  { start = "/**", end = "*/" },
+  { start = "/*!", end = "*/" },
+]
+language-servers = [ "rust-analyzer" ]
+indent = { tab-width = 4, unit = "    " }
+persistent-diagnostic-sources = ["rustc", "clippy"]
+
+[language.auto-pairs]
+'(' = ')'
+'{' = '}'
+'[' = ']'
+'"' = '"'
+'`' = '`'
+
 [[grammar]]
-name = "typst"
-source.git = "https://github.com/uben0/tree-sitter-typst"
-source.rev = "13863ddcbaa7b68ee6221cea2e3143415e64aea4"
+name = "rust"
+source = { git = "https://github.com/tree-sitter/tree-sitter-rust", rev = "9c84af007b0f144954adb26b3f336495cbb320a7" }
 
+[language-server.rust-analyzer]
+command = "rust-analyzer"
 
+[language-server.rust-analyzer.config]
+inlayHints.bindingModeHints.enable = false
+inlayHints.closingBraceHints.minLines = 10
+inlayHints.closureReturnTypeHints.enable = "with_block"
+inlayHints.discriminantHints.enable = "fieldless"
+inlayHints.lifetimeElisionHints.enable = "skip_trivial"
+inlayHints.typeHints.hideClosureInitialization = false
